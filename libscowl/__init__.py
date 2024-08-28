@@ -66,7 +66,7 @@ def validateWord(w):
     if not m:
         raise ValueError(f"invalid word: {w}")
 
-wordPartRegex = re.compile(f'(\+?)({_wordRegex})([*@~!-]?)†?')
+wordPartRegex = re.compile(rf'(\+?)({_wordRegex})([*@~!-]?)†?')
 
 def parseWordPart(w):
     m = wordPartRegex.fullmatch(w)
@@ -653,7 +653,7 @@ class Line(LineBase):
             lemmaSpellingsKeys = '_',
         for w in wordStrs:
             w = w.strip()
-            m_ = re.fullmatch('\((.+)\)', w)
+            m_ = re.fullmatch(r'\((.+)\)', w)
             if m_:
                 wes = [we for we in (WordEntry.parse(w_.strip(), lemmaSpellingsKeys) for w_ in m_[1].split('|')) if we is not None]
             else:
